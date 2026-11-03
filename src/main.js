@@ -1,60 +1,84 @@
+import 'pretendard/dist/web/static/pretendard-dynamic-subset.css'
 import './style.css'
-import heroImg from './assets/hero.png'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+const header = document.getElementById('siteHeader')
+const navToggle = document.getElementById('navToggle')
+const navMenu = document.getElementById('navMenu')
+const navLinks = document.querySelectorAll('.nav-link')
 
-<div class="ticks"></div>
+// 스크롤 시 헤더 그림자
+const onScroll = () => {
+  header.classList.toggle('scrolled', window.scrollY > 20)
+}
+window.addEventListener('scroll', onScroll, { passive: true })
+onScroll()
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+// 모바일 메뉴 열기/닫기
+const setMenu = (open) => {
+  navMenu.classList.toggle('open', open)
+  navToggle.classList.toggle('open', open)
+  navToggle.setAttribute('aria-expanded', String(open))
+  navToggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기')
+}
+navToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('open')))
+navLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)))
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+// 스크롤에 따라 콘텐츠 나타나기
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target
+        el.classList.add('visible')
+        revealObserver.unobserve(el)
+        // 등장 후에는 지연을 없애 마우스 반응이 바로 나타나도록
+        setTimeout(() => (el.style.transitionDelay = '0s'), 1300)
+      }
+    })
+  },
+  { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+)
+document.querySelectorAll('.reveal').forEach((el) => {
+  // 같은 줄에 있는 카드가 순차적으로 나타나도록 지연
+  const siblings = el.parentElement.querySelectorAll(':scope > .reveal')
+  const index = Array.prototype.indexOf.call(siblings, el)
+  el.style.transitionDelay = `${Math.min(index, 4) * 0.1}s`
+  revealObserver.observe(el)
+})
 
-setupCounter(document.querySelector('#counter'))
+// 현재 보고 있는 섹션의 메뉴 강조
+// philosophy 영역은 Home 메뉴에 포함
+const sectionToNav = { home: 'home', philosophy: 'home', career: 'career', classes: 'classes', interests: 'interests' }
+const navObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return
+      const target = sectionToNav[entry.target.id]
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${target}`)
+      })
+    })
+  },
+  { rootMargin: '-45% 0px -50% 0px' }
+)
+Object.keys(sectionToNav).forEach((id) => {
+  const section = document.getElementById(id)
+  if (section) navObserver.observe(section)
+})
+
+// 첫 화면 배경 장식이 마우스를 살짝 따라 움직이는 효과 (PC 전용)
+const decos = document.querySelectorAll('.deco')
+const canHover = window.matchMedia('(hover: hover)').matches
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+if (canHover && !reduceMotion) {
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2
+    const y = (e.clientY / window.innerHeight - 0.5) * 2
+    decos.forEach((deco, i) => {
+      const depth = (i + 1) * 6
+      deco.style.translate = `${x * depth}px ${y * depth}px`
+    })
+  })
+}
+
+document.getElementById('year').textContent = new Date().getFullYear()

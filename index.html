@@ -1,13 +1,325 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>261103_website</title>
+    <meta name="description" content="교실에서 질문하고, 연구로 가능성을 넓히는 초등교사 명지수의 자기소개 페이지" />
+    <title>명지수 | 초등과학교사</title>
   </head>
   <body>
-    <div id="app"></div>
+    <!-- 배경 장식 (과학 센서 / 메이커 실루엣) -->
+    <div class="bg-deco" aria-hidden="true">
+      <div class="bg-grid"></div>
+      <svg class="deco deco-gear" viewBox="0 0 100 100">
+        <path d="M50 30a20 20 0 1 0 0 40a20 20 0 1 0 0-40zm0 10a10 10 0 1 1 0 20a10 10 0 1 1 0-20z" />
+        <g>
+          <rect x="45" y="6" width="10" height="16" rx="2" />
+          <rect x="45" y="78" width="10" height="16" rx="2" />
+          <rect x="6" y="45" width="16" height="10" rx="2" />
+          <rect x="78" y="45" width="16" height="10" rx="2" />
+          <rect x="45" y="6" width="10" height="16" rx="2" transform="rotate(45 50 50)" />
+          <rect x="45" y="78" width="10" height="16" rx="2" transform="rotate(45 50 50)" />
+          <rect x="6" y="45" width="16" height="10" rx="2" transform="rotate(45 50 50)" />
+          <rect x="78" y="45" width="16" height="10" rx="2" transform="rotate(45 50 50)" />
+        </g>
+        <circle cx="50" cy="50" r="28" fill="none" stroke-width="10" />
+      </svg>
+      <svg class="deco deco-atom" viewBox="0 0 100 100" fill="none" stroke-width="2">
+        <ellipse cx="50" cy="50" rx="44" ry="16" />
+        <ellipse cx="50" cy="50" rx="44" ry="16" transform="rotate(60 50 50)" />
+        <ellipse cx="50" cy="50" rx="44" ry="16" transform="rotate(120 50 50)" />
+        <circle cx="50" cy="50" r="6" class="fill" />
+      </svg>
+      <svg class="deco deco-flask" viewBox="0 0 100 100" fill="none" stroke-width="3">
+        <path d="M38 10h24M42 10v28L18 82a6 6 0 0 0 5 9h54a6 6 0 0 0 5-9L58 38V10" />
+        <path d="M28 68h44" />
+        <circle cx="45" cy="78" r="3" class="fill" />
+        <circle cx="58" cy="74" r="2" class="fill" />
+      </svg>
+      <svg class="deco deco-wave" viewBox="0 0 400 80" fill="none" stroke-width="2">
+        <path d="M0 40h60l12-30 16 60 14-45 10 25 8-10h280" />
+      </svg>
+      <svg class="deco deco-circuit" viewBox="0 0 160 160" fill="none" stroke-width="2">
+        <path d="M10 30h50v40h50M60 70v60h80M110 70V20h40M30 130h30" />
+        <circle cx="10" cy="30" r="4" class="fill" />
+        <circle cx="150" cy="20" r="4" class="fill" />
+        <circle cx="140" cy="130" r="4" class="fill" />
+        <circle cx="30" cy="130" r="4" class="fill" />
+        <rect x="95" y="58" width="30" height="24" rx="3" />
+      </svg>
+    </div>
+
+    <!-- 상단 메뉴 -->
+    <header class="site-header" id="siteHeader">
+      <nav class="nav container" aria-label="주 메뉴">
+        <a href="#home" class="logo">
+          <img class="logo-mark" src="/profile-face.jpg" alt="" width="40" height="40" />
+          <span class="logo-text">명지수<small>Science Teacher</small></span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#career" class="nav-link">경력</a></li>
+          <li><a href="#classes" class="nav-link">수업</a></li>
+          <li><a href="#interests" class="nav-link">관심 분야</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ 1. HOME (첫 화면) ============ -->
+      <section class="hero" id="home">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <p class="eyebrow reveal">ELEMENTARY SCIENCE TEACHER · RESEARCHER</p>
+            <h1 class="hero-name reveal">
+              명지수 <span class="hero-name-en">Myung Jisoo</span>
+            </h1>
+            <p class="hero-tagline reveal">
+              교실에서 <em>질문</em>하고,<br />
+              연구로 <em>가능성</em>을 넓히는 초등교사
+            </p>
+            <p class="hero-intro reveal">
+              학생들과 함께 실험하고, 코딩하고, 만들며 배움의 즐거움을 나누는 초등교사입니다. 센서와 AI, 디지털 도구로
+              아이들의 궁금함이 탐구로 이어지는 수업을 만들고 있습니다. 교실에서 생긴 질문을 연구로 이어 가며, 동료
+              교사들과 함께 더 나은 수업을 고민합니다.
+            </p>
+            <div class="hero-buttons reveal">
+              <a href="#career" class="btn btn-primary">나의 이야기 <span aria-hidden="true">→</span></a>
+              <a href="#classes" class="btn btn-outline">연구 및 프로젝트</a>
+            </div>
+          </div>
+
+          <!-- 센서 프레임 카드 -->
+          <div class="hero-visual reveal">
+            <div class="sensor-frame">
+              <span class="corner tl"></span><span class="corner tr"></span>
+              <span class="corner bl"></span><span class="corner br"></span>
+              <div class="sensor-head">
+                <span class="dot"></span> LIVE · CLASSROOM SENSOR
+              </div>
+              <div class="photo-placeholder has-photo">
+                <img src="/profile.jpg" alt="명지수 프로필 사진" width="900" height="900" />
+              </div>
+              <svg class="sensor-graph" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0 40 L30 38 L50 20 L70 44 L95 30 L120 34 L140 12 L165 40 L190 28 L215 32 L240 16 L270 36 L300 26" />
+              </svg>
+              <dl class="sensor-data">
+                <div><dt>Curiosity</dt><dd>98%</dd></div>
+                <div><dt>Inquiry</dt><dd>ON</dd></div>
+                <div><dt>Make</dt><dd>∞</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <a href="#philosophy" class="scroll-cue" aria-label="아래로 스크롤">
+          <span>SCROLL</span><i></i>
+        </a>
+      </section>
+
+      <!-- 나의 교육 철학 (Home 영역 이어짐) -->
+      <section class="section" id="philosophy">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-num">01 · PHILOSOPHY</p>
+            <h2 class="section-title">나의 교육 철학</h2>
+          </div>
+          <div class="card-grid three">
+            <article class="card glass reveal">
+              <div class="card-icon">?</div>
+              <h3>궁금함이 배움이 되는 수업</h3>
+              <p>
+                좋은 수업은 학생의 궁금함에서 시작한다고 믿습니다. 아이들이 자기 생각을 자유롭게 말하고 질문할 수 있는
+                분위기를 만들고, 그 질문을 따라가며 스스로 답을 찾는 경험을 주고자 합니다. 정답을 아는 것보다 '왜
+                그럴까?'를 끝까지 생각해 보는 힘을 소중히 여깁니다.
+              </p>
+            </article>
+            <article class="card glass reveal">
+              <div class="card-icon">⚗</div>
+              <h3>함께 해 보며 자라는 배움</h3>
+              <p>
+                배움은 직접 해 보고, 시행착오를 겪고, 서로 이야기 나누는 과정에서 깊어집니다. 학생들이 친구와 생각을
+                나누고 함께 문제를 해결하며 배우는 수업을 지향합니다. 교사는 답을 알려주는 사람이기보다 생각을 이끌어
+                주고 연결해 주는 안내자가 되고자 합니다.
+              </p>
+            </article>
+            <article class="card glass reveal">
+              <div class="card-icon">⚙</div>
+              <h3>미래를 여는 도구와의 만남</h3>
+              <p>
+                AI와 디지털 기술은 학생들의 배움을 더 넓고 풍부하게 만들어 주는 도구입니다. 아이들이 새로운 기술을
+                두려움 없이 경험하고, 그것을 활용해 자신의 생각을 표현하고 실현해 볼 수 있도록 돕습니다. 기술을 쓰는
+                데서 그치지 않고 올바르게 이해하고 책임감 있게 활용하는 태도를 함께 기르고자 합니다.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 2. 경력 ============ -->
+      <section class="section section-tint" id="career">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-num">02 · CAREER</p>
+            <h2 class="section-title">경력</h2>
+            <p class="section-desc">배움을 꿈꾸는 7년차 초등교사입니다.</p>
+          </div>
+
+          <!-- 항목을 추가하려면 <li class="timeline-item"> 블록을 복사하세요 -->
+          <ol class="timeline">
+            <li class="timeline-item reveal">
+              <span class="timeline-date">2026 – 현재</span>
+              <div class="timeline-body glass">
+                <h3>동작관악수학과학융합교육센터 파견교사</h3>
+                <ul class="timeline-list">
+                  <li>2026 '찾아가는 K-STEM 융합과학교실' 운영</li>
+                  <li>센터 체험 프로그램 기획·운영</li>
+                  <li>동작관악교육지원청 AI 행정 개선 사례 발표</li>
+                  <li>AI 피지컬로봇 교사 연구회</li>
+                  <li>AI 정보교육 연구회</li>
+                </ul>
+              </div>
+            </li>
+            <li class="timeline-item reveal">
+              <span class="timeline-date">2026 – 현재</span>
+              <div class="timeline-body glass">
+                <h3>서울대학교 AI융합교육학과 석사과정</h3>
+              </div>
+            </li>
+            <li class="timeline-item reveal">
+              <span class="timeline-date">2020 – 2025</span>
+              <div class="timeline-body glass">
+                <h3>서울봉천초등학교 교사</h3>
+                <ul class="timeline-list">
+                  <li>교육혁신 선도교사</li>
+                  <li>AI융합교육 연구회</li>
+                  <li>AI 활용 수업 사례 나눔</li>
+                  <li>코딩, SW 수업</li>
+                </ul>
+              </div>
+            </li>
+            <li class="timeline-item reveal">
+              <span class="timeline-date">2018</span>
+              <div class="timeline-body glass">
+                <h3>서울교육대학교 과학교육과 졸업</h3>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ 3. 수업 (수업 및 연구 프로젝트) ============ -->
+      <section class="section" id="classes">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-num">03 · CLASSES &amp; PROJECTS</p>
+            <h2 class="section-title">수업 및 연구 프로젝트</h2>
+            <p class="section-desc">
+              학생들이 직접 탐구하고 만들며 배우는 수업을 고민해 왔습니다. 현장에서 실천한 수업을 소개합니다.
+            </p>
+          </div>
+
+          <!-- 카드를 추가하려면 <article class="project-card"> 블록을 복사하세요 -->
+          <div class="card-grid three">
+            <article class="card project-card glass reveal">
+              <div class="project-thumb"><img src="/projects/project-01.jpg" alt="우리 주변 기체의 성질 수업 표지" width="960" height="540" loading="lazy" /><span class="project-label">PROJECT 01</span></div>
+              <div class="project-body">
+                <span class="tag">찾아가는 K-STEM 융합과학교실</span>
+                <h3>센서로 찾아내는 우리 주변 기체의 성질</h3>
+                <p>
+                  눈에 보이지 않는 기체를 무선 센서로 측정해 보는 4학년 과학 수업입니다. 학생들은 탄산수 위의 기체와
+                  우리가 내쉰 숨을 산소·이산화탄소 센서로 측정합니다. 그 데이터를 비교하고 해석하면서 기체의 특징을
+                  스스로 알아냅니다.
+                </p>
+                <!-- TODO: href="#"를 실제 링크로 교체 -->
+                <a href="#" class="link-arrow">자세히 보기 <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="card project-card glass reveal">
+              <div class="project-thumb"><img src="/projects/project-02.jpg" alt="달려라 햄스터봇 수업 표지" width="960" height="540" loading="lazy" /><span class="project-label">PROJECT 02</span></div>
+              <div class="project-body">
+                <span class="tag">AI 피지컬컴퓨팅 · 실과 창체 융합</span>
+                <h3>달려라 햄스터봇! 센서와 AI 카메라로 길 찾기</h3>
+                <p>
+                  자율주행 자동차의 원리를 코딩 로봇으로 직접 경험해 보는 수업입니다. 학생들은 햄스터봇의 기본 동작과
+                  센서를 코딩해 미로 달리기에 도전합니다. 이어서 AI 카메라에 길을 학습시켜 로봇이 스스로 방향을 찾아
+                  달리는 자율주행 미션을 수행합니다.
+                </p>
+                <!-- TODO: href="#"를 실제 링크로 교체 -->
+                <a href="#" class="link-arrow">자세히 보기 <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="card project-card glass reveal">
+              <div class="project-thumb"><img src="/projects/project-03.jpg" alt="마이크로비트로 레트로 게임기 만들기 수업 표지" width="960" height="540" loading="lazy" /><span class="project-label">PROJECT 03</span></div>
+              <div class="project-body">
+                <span class="tag">코딩 · 메이커 교육</span>
+                <h3>마이크로비트로 레트로 게임기 만들기</h3>
+                <p>
+                  블록 코딩으로 나만의 게임을 만들어 실제 게임기에서 즐겨 보는 수업입니다. 학생들은 게임의 요소인 목표,
+                  규칙, 승리 조건을 생각하며 간단한 게임을 따라 만들어 봅니다. 그다음 캐릭터와 규칙을 바꿔 나만의
+                  게임으로 완성합니다.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4. 관심 분야 ============ -->
+      <section class="section section-navy" id="interests">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-num">04 · RESEARCH INTERESTS</p>
+            <h2 class="section-title">관심 분야</h2>
+            <p class="section-desc">[관심 분야 섹션 소개 문구를 입력하세요.]</p>
+          </div>
+          <div class="card-grid two">
+            <article class="card interest-card reveal">
+              <span class="interest-no">01</span>
+              <h3>실험과 센서를 활용한 초등과학교육과 교사교육</h3>
+              <p class="interest-sub">지능형 과학실</p>
+              <p>무선 센서와 디지털 실험 도구를 활용하면 눈에 보이지 않는 현상을 데이터로 확인할 수 있습니다. 학생들이 이런 탐구로 과학을 더 깊이 이해하는 수업에 관심을 갖고 있습니다. 또 지능형 과학실의 장비를 선생님들이 수업에서 쉽게 활용할 수 있도록 돕는 교사교육 방안도 함께 고민하고 있습니다.</p>
+            </article>
+            <article class="card interest-card reveal">
+              <span class="interest-no">02</span>
+              <h3>AI와 디지털 도구를 활용한 수업</h3>
+              <p>AI와 디지털 도구는 학생들의 생각을 표현하고 넓혀 주는 배움의 도구입니다. 학생들이 기술을 단순히 사용하는 데 그치지 않도록, 그 원리를 이해하고 바르고 책임감 있게 활용하는 수업을 연구하고 있습니다.</p>
+            </article>
+            <article class="card interest-card reveal">
+              <span class="interest-no">03</span>
+              <h3>학생의 절차적 사고와 학습 과정</h3>
+              <p>학생들이 문제를 나누고, 순서를 세우고, 시행착오를 거쳐 해결해 가는 과정에 주목합니다. 결과보다 생각이 만들어지는 과정을 살펴보며, 학생의 사고를 키우고 지원하는 수업 방법을 탐색하고 있습니다.</p>
+            </article>
+            <article class="card interest-card reveal">
+              <span class="interest-no">04</span>
+              <h3>상상하고 만들고 나누는 메이커교육</h3>
+              <p>학생들이 머릿속의 아이디어를 직접 손으로 만들어 보고, 그 결과를 친구들과 나누는 경험을 소중히 여깁니다. 다양한 도구로 창작하는 과정에서 문제 해결력과 협력, 표현하는 즐거움을 함께 기르는 메이커교육을 실천하고 있습니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ 연락처 ============ -->
+    <footer class="footer" id="contact">
+      <div class="container footer-inner reveal">
+        <div>
+          <p class="section-num">CONTACT</p>
+          <h2 class="footer-title">함께 질문하고, 함께 탐구해요.</h2>
+        </div>
+        <ul class="contact-list">
+          <!-- TODO: 실제 이메일과 링크로 교체 -->
+          <li><span>Email</span><a href="mailto:myungjisoo@snu.ac.kr">myungjisoo@snu.ac.kr</a></li>
+          <li><span>Blog</span><a href="#">[관련 사이트 링크]</a></li>
+          <li><span>Link</span><a href="#">[관련 사이트 링크]</a></li>
+        </ul>
+      </div>
+      <p class="copyright">© <span id="year"></span> 명지수. All rights reserved.</p>
+    </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
